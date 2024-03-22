@@ -16,7 +16,8 @@ int		main(int argc, char* argv[])
 		return -1;
 	}
 
-	while (true) {
+	while (true)
+	{
 		struct pcap_pkthdr* header;
 		const u_char* packet;
 		int res = pcap_next_ex(pcap, &header, &packet);
@@ -26,6 +27,12 @@ int		main(int argc, char* argv[])
 			break;
 		}
 		printf("%u bytes captured\n", header->caplen);
+
+		struct libnet_ethernet_hdr *eth_hdr = (struct libnet_ethernet_hdr *)packet;
+		if (ntohs(eth_hdr -> ether_type) == ETHERTYPE_IP)
+		{
+
+		}
 	}
 
 	pcap_close(pcap);

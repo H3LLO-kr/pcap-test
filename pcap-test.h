@@ -1,7 +1,10 @@
 #include <stdio.h>
-#include <libnet/libnet-headers.h>
-#include <pcap.h>
+#include <pcap/pcap.h>
 #include <stdbool.h>
+#include <stdint.h>
+#include <libnet.h>
+
+#define u_int8_t uint8_t
 
 typedef struct {
 	char* dev_;

@@ -1,9 +1,23 @@
-LDLIBS += -lpcap
+NAME	= pcap-test
+CC		= gcc
+CFLAGS	= -lpcap
+RM		= rm -rf
+SRCS	= pcap-test.c
+OBJS	= $(SRCS:.c=.o)
 
-all: pcap-test
 
-pcap-test: pcap-test.c
+all: $(NAME)
+
+$(NAME) : $(OBJS)
+	$(CC) $(CFLAGS) $< -o $@
+
+$(OBJS) : $(SRCS)
+	$(CC) $(CFLAGS) $< -c -o $@
 
 clean:
-	rm -f pcap-test *.o
+	$(RM) $(NAME)
+	$(RM) $(OBJS)
+
+
+.PHONY: all clean
 
