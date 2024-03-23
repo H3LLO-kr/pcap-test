@@ -1,3 +1,7 @@
+#ifndef PCAP_TEST_H
+
+#define PCAP_TEST_H
+
 #include <stdio.h>
 #include <pcap/pcap.h>
 #include <stdbool.h>
@@ -10,6 +14,13 @@ typedef struct {
 	char* dev_;
 } Param;
 
-int main(int argc, char* argv[]);
-bool parse(Param* param, int argc, char* argv[]);
-void usage(void);
+/*			pcap-test.c				*/
+int		main(int argc, char* argv[]);
+bool	parse(Param* param, int argc, char* argv[]);
+void	usage(void);
+
+/*			_print.c				*/
+int		_print_ip(struct in_addr ip);
+int		_print_mac(uint8_t mac[]);
+
+#endif
