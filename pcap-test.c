@@ -38,7 +38,7 @@ int		main(int argc, char* argv[])
 			continue ;
 		struct libnet_tcp_hdr *tcp_hdr = (struct libnet_tcp_hdr *)((char *)ip_hdr + LIBNET_IPV4_H);
 
-		printf("-----------------------------------\n");
+		printf("---------------------------------------------------------\n");
 		printf("Ethernet Header\n");
 		printf("Source mac		: ");
 		_print_mac(eth_hdr -> ether_shost);
@@ -52,6 +52,20 @@ int		main(int argc, char* argv[])
 		printf("TCP Header\n");
 		printf("Source Port		: %hu\n", ntohs(tcp_hdr -> th_sport));
 		printf("Destination Port: %hu\n", ntohs(tcp_hdr -> th_dport));
+
+		if (ntohs(ip_hdr -> ip_len) > LIBNET_IPV4_H + tcp_hdr -> th_off * 4)
+		{
+			printf("Data			: ");
+			int data_len = ip_hdr -> ip_len - LIBNET_IPV4_H - LIBNET_TCP_H;
+			if (data_len > 20)
+				data_len = 20;
+			for (int i = 0; i < data_len; i++)
+				printf("%02x", packet[LIBNET_ETH_H + LIBNET_IPV4_H + tcp_hdr -> th_off * 4 + i]);
+			printf("\n");
+		}
+		else
+			printf("No Data\n");
+
 		printf("\n");
 	}
 
