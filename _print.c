@@ -2,8 +2,8 @@
 
 int		_print_ip(struct in_addr ip)
 {
-	uint32_t ip_addr = (uint32_t)ntohs(ip.s_addr);
-	printf("%u.%u.%u.%u", ip_addr & 0xF000 >> 24, ip_addr & 0x0F00 >> 16, ip_addr & 0x00F0 >> 8, ip_addr & 0x000F);
+	uint64_t ip_addr = (uint64_t)ntohl(ip.s_addr);
+	printf("%llu.%llu.%llu.%llu", (ip_addr & 0xFF000000) >> 24, (ip_addr & 0xFF0000) >> 16, (ip_addr & 0xFF00) >> 8, ip_addr & 0xFF);
 	printf("\n");
 	return (0);
 }

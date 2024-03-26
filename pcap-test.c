@@ -38,8 +38,6 @@ int		main(int argc, char* argv[])
 			continue ;
 		struct libnet_tcp_hdr *tcp_hdr = (struct libnet_tcp_hdr *)((char *)ip_hdr + LIBNET_IPV4_H);
 
-		printf("%x %x %x %d\n", packet[0], packet[LIBNET_ETH_H], packet[LIBNET_ETH_H + LIBNET_IPV4_H], LIBNET_IPV4_H);
-
 		printf("-----------------------------------\n");
 		printf("Ethernet Header\n");
 		printf("Source mac		: ");
