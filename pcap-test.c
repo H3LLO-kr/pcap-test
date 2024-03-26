@@ -33,10 +33,10 @@ int		main(int argc, char* argv[])
 		struct libnet_ethernet_hdr *eth_hdr = (struct libnet_ethernet_hdr *)packet;
 		if (ntohs(eth_hdr -> ether_type) != ETHERTYPE_IP)
 			continue ;
-		struct libnet_ipv4_hdr *ip_hdr = (struct libnet_ipv4_hdr *)eth_hdr + LIBNET_ETH_H;
+		struct libnet_ipv4_hdr *ip_hdr = (struct libnet_ipv4_hdr *)((char *)eth_hdr + LIBNET_ETH_H);
 		if (ip_hdr -> ip_p != 0x06) // if it is not a TCP Header
 			continue ;
-		struct libnet_tcp_hdr *tcp_hdr = (struct libnet_tcp_hdr *)ip_hdr + LIBNET_IPV4_H;
+		struct libnet_tcp_hdr *tcp_hdr = (struct libnet_tcp_hdr *)((char *)ip_hdr + LIBNET_IPV4_H);
 
 		printf("%x %x %x %d\n", packet[0], packet[LIBNET_ETH_H], packet[LIBNET_ETH_H + LIBNET_IPV4_H], LIBNET_IPV4_H);
 
