@@ -36,7 +36,7 @@ int		main(int argc, char* argv[])
 		struct libnet_ipv4_hdr *ip_hdr = (struct libnet_ipv4_hdr *)((char *)eth_hdr + LIBNET_ETH_H);
 		if (ip_hdr -> ip_p != 0x06) // if it is not a TCP Header
 			continue ;
-		struct libnet_tcp_hdr *tcp_hdr = (struct libnet_tcp_hdr *)((char *)ip_hdr + LIBNET_IPV4_H);
+		struct libnet_tcp_hdr *tcp_hdr = (struct libnet_tcp_hdr *)((char *)ip_hdr + (ip_hdr -> ip_hl << 2));
 
 		printf("---------------------------------------------------------\n");
 		printf("Ethernet Header\n");
